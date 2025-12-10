@@ -25,6 +25,12 @@ Antes de ejecutar el programa, asegúrate de tener instalado:
 git clone [https://github.com/AlejandroHernanCid/gestor-tareas-equipo-Alex-Jc]
 cd gestor-tareas-equipo-Alex-Jc 
 
+## Pasos a seguir para montar el entorno virtual
+
+python -m venv venv
+
+.\venv\Scripts\Activate.ps1
+
 ### 2. Instalar Dependencias
 
 El proyecto requiere la librería `colorama`. Instálala usando `pip` y el archivo `requirements.txt`:
