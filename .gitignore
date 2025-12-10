@@ -140,6 +140,11 @@ celerybeat.pid
 .venv
 env/
 venv/
+    __pycache__/
+    *.pyc
+    tareas.txt
+    .idea/
+    .vscode/
 ENV/
 env.bak/
 venv.bak/

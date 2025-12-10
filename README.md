@@ -44,3 +44,35 @@ pip install -r requirements.txt
 5. Salir
 
 Selecciona una opción (1-5):
+
+Capturas de ejemplo de cada opción del menú:
+
+1:
+
+![alt text](image.png)
+
+2:
+
+![alt text](image-1.png)
+
+3:
+
+![alt text](image-2.png)
+
+4:
+
+![alt text](image-3.png)
+
+5:
+
+![alt text](image-4.png)
+
+
+Nombre integrantes:
+
+    Alumno A: [Alejandro Hernán Cid]
+
+    Alumno B: [Juan Carlos Perez Simarro]
+
+
+
