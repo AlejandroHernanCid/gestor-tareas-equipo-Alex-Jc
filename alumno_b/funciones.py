@@ -5,7 +5,7 @@ fich = Path("tareas.txt")
 
 def marcar_completada(fichero):
     try:
-        with open(fichero, "r") as f:
+        with open(fichero, "r", encoding="utf-8") as f:
             tareas = f.readlines()
 
         if not tareas:
@@ -14,9 +14,13 @@ def marcar_completada(fichero):
 
         print(Fore.CYAN + "--- Tareas Actuales ---" + Style.RESET_ALL)
         for i, tarea in enumerate(tareas):
-            descripcion, completada = tarea.strip().split(',')
-            estado = Fore.GREEN + "Completada" if completada == '1' else Fore.RED + "Pendiente"
-            print(f"{i + 1}. {descripcion} - {estado}" + Style.RESET_ALL)
+            tarea_clean = tarea.strip()
+            # Manejar tareas con o sin prefijo [COMPLETADA]
+            if tarea_clean.startswith("[COMPLETADA]"):
+                descripcion = tarea_clean.replace("[COMPLETADA]", "").strip()
+                print(f"{i + 1}. " + Fore.GREEN + "[✓] {descripcion}" + Style.RESET_ALL)
+            else:
+                print(f"{i + 1}. " + Fore.YELLOW + "[ ] {tarea_clean}" + Style.RESET_ALL)
         
         print(Style.RESET_ALL)
 
@@ -31,13 +35,13 @@ def marcar_completada(fichero):
                 print(Fore.RED + "Por favor, introduce un número válido." + Style.RESET_ALL)
 
         idx_tarea = num_tarea - 1
-        descripcion, completada = tareas[idx_tarea].strip().split(',')
+        tarea_actual = tareas[idx_tarea].strip()
 
-        if completada == '1':
+        if tarea_actual.startswith("[COMPLETADA]"):
             print(Fore.YELLOW + "Esta tarea ya estaba completada." + Style.RESET_ALL)
         else:
-            tareas[idx_tarea] = f"{descripcion},1\n"
-            with open(fichero, "w") as f:
+            tareas[idx_tarea] = f"[COMPLETADA] {tarea_actual}\n"
+            with open(fichero, "w", encoding="utf-8") as f:
                 f.writelines(tareas)
             print(Fore.GREEN + "¡Tarea marcada como completada!" + Style.RESET_ALL)
 
@@ -49,7 +53,7 @@ def marcar_completada(fichero):
 def eliminar_tarea(fichero):
     """Elimina una tarea del fichero."""
     try:
-        with open(fichero, "r") as f:
+        with open(fichero, "r", encoding="utf-8") as f:
             tareas = f.readlines()
 
         if not tareas:
@@ -58,9 +62,13 @@ def eliminar_tarea(fichero):
 
         print(Fore.CYAN + "--- Tareas Actuales ---" + Style.RESET_ALL)
         for i, tarea in enumerate(tareas):
-            descripcion, completada = tarea.strip().split(',')
-            estado = Fore.GREEN + "Completada" if completada == '1' else Fore.RED + "Pendiente"
-            print(f"{i + 1}. {descripcion} - {estado}" + Style.RESET_ALL)
+            tarea_clean = tarea.strip()
+            # Manejar tareas con o sin prefijo [COMPLETADA]
+            if tarea_clean.startswith("[COMPLETADA]"):
+                descripcion = tarea_clean.replace("[COMPLETADA]", "").strip()
+                print(f"{i + 1}. " + Fore.GREEN + "[✓] {descripcion}" + Style.RESET_ALL)
+            else:
+                print(f"{i + 1}. " + Fore.YELLOW + "[ ] {tarea_clean}" + Style.RESET_ALL)
         
         print(Style.RESET_ALL)
 
@@ -76,7 +84,7 @@ def eliminar_tarea(fichero):
 
         tareas.pop(num_tarea - 1)
 
-        with open(fichero, "w") as f:
+        with open(fichero, "w", encoding="utf-8") as f:
             f.writelines(tareas)
         
         print(Fore.GREEN + "¡Tarea eliminada correctamente!" + Style.RESET_ALL)
